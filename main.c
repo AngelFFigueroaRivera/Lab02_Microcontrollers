@@ -16,6 +16,7 @@
 #define ONE_SECOND 1000                  // sets de variable one_second the numeric val 
 #define TWOMS_SECOND 250
 #define ThreeMS_SECOND 300
+#define FiveMS_SECOND 500
 
 
 //names to integral constants, the names make a program easy to read and 
@@ -35,100 +36,91 @@ void __interrupt ( low_priority ) low_isr( void );    //ISR for low-priority
 
 //++++++++++++++++++++++++FUNCTIONs DECLARATION++++++++++++++++++++++++++++++++ 
 void portsInit( void );                   // Ports configuration function.
-void larsondisplay(void)
-
+void larsondisplay(void);
+// __delay_ms
 //+++++++++++++++++++++++++++++Main Function+++++++++++++++++++++++++++++++++++
 void main( void ) {
 	// CONFIGURATIONS**********************************************************
 	portsInit();                          // calls the function of ports configuration.
     while( 1 ) {                          //loop that helps to repeat infinite the actions
-        srand(time(NULL));
-		int randomNumber = rand() % 7;
-        int mytime;
+        int randomNumber = rand() % 7;
+        int mytime = 20000;
         switch (randomNumber) {
             case 0:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA0 = led_ON;
+                LATAbits.LATA0 = led_ON;
+                for (int i = 0; i < mytime; ++i) {    
                     if (PORTDbits.RD0 == pushed) {
-                        TRISAbits.TRISA0 = led_OFF;
+                        LATAbits.LATA0 = led_OFF;
                         larsondisplay();
                         break;
                     }
-                }            
+                }         
                 break;
             case 1:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA1 = led_ON;
-                    if (PORTDbits.RD01 == pushed) {
-                        TRISAbits.TRISA1 = led_OFF;
+                LATAbits.LATA1 = led_ON;
+                for (int i = 0; i < mytime; ++i) {    
+                    if (PORTDbits.RD1 == pushed) {
+                        LATAbits.LATA1 = led_OFF;
                         larsondisplay();
                         break;
                     }
                 }
                 break;
             case 2:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA2 = led_ON;
+                LATAbits.LATA2 = led_ON;
+                for (int i = 0; i < mytime; ++i) {
                     if (PORTDbits.RD2 == pushed) {
-                        TRISAbits.TRISA2 = led_OFF;
+                        LATAbits.LATA2 = led_OFF;
                         larsondisplay();
                         break;
                     }
                 }
                 break;
             case 3:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA3 = led_ON;
+                LATAbits.LATA3 = led_ON;
+                for (int i = 0; i < mytime; ++i) {    
                     if (PORTDbits.RD3 == pushed) {
-                        TRISAbits.TRISA3 = led_OFF;
+                        LATAbits.LATA3 = led_OFF;
                         larsondisplay();
                         break;
                     }
                 }
                 break;
             case 4:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA4 = led_ON;
+                LATAbits.LATA4 = led_ON;
+                for (int i = 0; i < mytime; ++i) {
                     if (PORTDbits.RD4 == pushed) {
-                        TRISAbits.TRISA4 = led_OFF;
+                        LATAbits.LATA4 = led_OFF;
                         larsondisplay();
                         break;
                     }
                 }
                 break;
             case 5:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA5 = led_ON;
+                LATAbits.LATA5 = led_ON;
+                for (int i = 0; i < mytime; ++i) {    
                     if (PORTDbits.RD5 == pushed) {
-                        TRISAbits.TRISA5 = led_OFF;
+                        LATAbits.LATA5 = led_OFF;
                         larsondisplay();
                         break;
                     }
                 }
                 break;
             case 6:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA6 = led_ON;
+                LATAbits.LATA6 = led_ON;
+                for (int i = 0; i < mytime; ++i) {
                     if (PORTDbits.RD6 == pushed) {
-                        TRISAbits.TRISA6 = led_OFF;
+                        LATAbits.LATA6 = led_OFF;
                         larsondisplay();
                         break;
                     }
                 }
                 break;
             case 7:
-                mytime = clock();
-                while(clock() < mytime + 500) {
-                    TRISAbits.TRISA7 = led_ON;
+                LATAbits.LATA7 = led_ON;
+                for (int i = 0; i < mytime; ++i) {
                     if (PORTDbits.RD7 == pushed) {
-                        TRISAbits.TRISA7 = led_OFF;
+                        LATAbits.LATA7 = led_OFF;
                         larsondisplay();
                         break;
                     }
@@ -137,17 +129,15 @@ void main( void ) {
             default:
                 break;
         }
-        TRISAbits.TRISA0 = led_OFF;
-        TRISAbits.TRISA1 = led_OFF;
-        TRISAbits.TRISA2 = led_OFF;
-        TRISAbits.TRISA3 = led_OFF;
-        TRISAbits.TRISA4 = led_OFF;
-        TRISAbits.TRISA5 = led_OFF;
-        TRISAbits.TRISA6 = led_OFF;
-        TRISAbits.TRISA7 = led_OFF;
-        int mytime2 = clock(); 
-        while(clock() < mytime2 + 1000) {
-        }
+        LATAbits.LATA0 = led_OFF;
+        LATAbits.LATA1 = led_OFF;
+        LATAbits.LATA2 = led_OFF;
+        LATAbits.LATA3 = led_OFF;
+        LATAbits.LATA4 = led_OFF;
+        LATAbits.LATA5 = led_OFF;
+        LATAbits.LATA6 = led_OFF;
+        LATAbits.LATA7 = led_OFF;
+        __delay_ms( 1000 );
 	}
 }
 
@@ -179,95 +169,91 @@ void larsondisplay(void) {
     for (int i = 0; i < 8; ++i) {
         switch (i) {
             case 0:
-                TRISAbits.TRISA0 = led_ON;
+                LATAbits.LATA0 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA0 = led_OFF;
+                LATAbits.LATA0 = led_OFF;
                 break;
             case 1:
-                TRISAbits.TRISA1 = led_ON;
+                LATAbits.LATA1 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA1 = led_OFF;
+                LATAbits.LATA1 = led_OFF;
                 break;
             case 2:
-                TRISAbits.TRISA2 = led_ON;
+                LATAbits.LATA2 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA2 = led_OFF;
+                LATAbits.LATA2 = led_OFF;
                 break;
             case 3:
-                TRISAbits.TRISA3 = led_ON;
+                LATAbits.LATA3 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA3 = led_OFF;
+                LATAbits.LATA3 = led_OFF;
                 break;
             case 4:
-                TRISAbits.TRISA4 = led_ON;
+                LATAbits.LATA4 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA4 = led_OFF;
+                LATAbits.LATA4 = led_OFF;
                 break;
             case 5:
-                TRISAbits.TRISA5 = led_ON;
+                LATAbits.LATA5 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA5 = led_OFF;
+                LATAbits.LATA5 = led_OFF;
                 break;
             case 6:
-                TRISAbits.TRISA6 = led_ON;
+                LATAbits.LATA6 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA6 = led_OFF;
+                LATAbits.LATA6 = led_OFF;
                 break;
             case 7:
-                TRISAbits.TRISA7 = led_ON;
+                LATAbits.LATA7 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA7 = led_OFF;
+                LATAbits.LATA7 = led_OFF;
                 break;
         }
-        int larsontime = clock(); 
-        while(clock() < larsontime + 300) {
-        }
+        __delay_ms( ThreeMS_SECOND );
     }
     for (int i = 7; i>=0; --i) {
         switch (i) {
             case 0:
-                TRISAbits.TRISA0 = led_ON;
+                LATAbits.LATA0 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA0 = led_OFF;
+                LATAbits.LATA0 = led_OFF;
                 break;
             case 1:
-                TRISAbits.TRISA1 = led_ON;
+                LATAbits.LATA1 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA1 = led_OFF;
+                LATAbits.LATA1 = led_OFF;
                 break;
             case 2:
-                TRISAbits.TRISA2 = led_ON;
+                LATAbits.LATA2 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA2 = led_OFF;
+                LATAbits.LATA2 = led_OFF;
                 break;
             case 3:
-                TRISAbits.TRISA3 = led_ON;
+                LATAbits.LATA3 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA3 = led_OFF;
+                LATAbits.LATA3 = led_OFF;
                 break;
             case 4:
-                TRISAbits.TRISA4 = led_ON;
+                LATAbits.LATA4 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA4 = led_OFF;
+                LATAbits.LATA4 = led_OFF;
                 break;
             case 5:
-                TRISAbits.TRISA5 = led_ON;
+                LATAbits.LATA5 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA5 = led_OFF;
+                LATAbits.LATA5 = led_OFF;
                 break;
             case 6:
-                TRISAbits.TRISA6 = led_ON;
+                LATAbits.LATA6 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA6 = led_OFF;
+                LATAbits.LATA6 = led_OFF;
                 break;
             case 7:
-                TRISAbits.TRISA7 = led_ON;
+                LATAbits.LATA7 = led_ON;
                 __delay_ms( ThreeMS_SECOND );
-                TRISAbits.TRISA7 = led_OFF;
+                LATAbits.LATA7 = led_OFF;
                 break;
         }
-        int larsonTimeBack = clock(); 
-        while(clock() < larsonTimeBack + 300) {
-        }
+        __delay_ms( ThreeMS_SECOND );
     }
 }
